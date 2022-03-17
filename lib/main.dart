@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}≥
+}
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
   final List<Transaction> transaction = [
@@ -40,11 +40,6 @@ class MyHomePage extends StatefulWidget {
     ),
   ];
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,4 +70,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-f
