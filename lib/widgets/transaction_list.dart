@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_import, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors, unused_import, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
@@ -12,50 +12,54 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: transactions.map((tx) {
-        return Card(
-          child: Row(
-            children: <Widget>[
-              Container(
-                  margin: EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 15,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.purple,
-                      width: 2,
+    return Container(
+      height: 300,
+      child: ListView.builder(
+        itemBuilder: ((context, index) {
+          return Card(
+            child: Row(
+              children: <Widget>[
+                Container(
+                    margin: EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 15,
                     ),
-                  ),
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    '\₹ ${tx.money.toString()}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Color.fromARGB(255, 63, 63, 60),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.purple,
+                        width: 2,
+                      ),
                     ),
-                  )),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(tx.title,
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      '\₹ ${transactions[index].money.toString()}',
                       style: TextStyle(
-                        fontSize: 20,
                         fontWeight: FontWeight.bold,
-                      )),
-                  Text(
-                    // tx.date.toString(),
-                    DateFormat.yMMMMd().format(tx.date),
-                    style: TextStyle(fontSize: 15, color: Colors.grey),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      }).toList(),
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 63, 63, 60),
+                      ),
+                    )),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(transactions[index].title,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Text(
+                      // tx.date.toString(),
+                      DateFormat.yMMMMd().format(transactions[index].date),
+                      style: TextStyle(fontSize: 15, color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        }),
+        itemCount: transactions.length,
+      ),
     );
   }
 }

@@ -44,24 +44,22 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('My Expenses App'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                child: Container(
-                  width: double.infinity,
-                  child: Text('CHART!'),
-                ),
-                elevation: 5,
+      body: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            child: Card(
+              child: Container(
+                width: double.infinity,
+                child: Text('CHART!'),
               ),
+              elevation: 5,
             ),
-            UserTransactions()
-          ],
-        ),
+          ),
+          UserTransactions()
+        ],
       ),
     );
   }
