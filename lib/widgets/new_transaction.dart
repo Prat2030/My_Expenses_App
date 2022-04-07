@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 
@@ -8,6 +8,17 @@ class NewTransaction extends StatelessWidget {
   final amountController = TextEditingController();
 
   NewTransaction(this.addTx);
+
+  void SubmitData() {
+    final EnteredTitle = titleController.text;
+    final EnteredAmount = double.parse(amountController.text);
+
+    if (EnteredTitle.isEmpty || EnteredAmount <= 0) {
+      return;
+    }
+
+    addTx(EnteredTitle, EnteredAmount);
+  }
 
   // NewTransaction(void Function(String txTitle, double txAmount) addNewTransaction);
 
@@ -29,17 +40,13 @@ class NewTransaction extends StatelessWidget {
           TextField(
             decoration: InputDecoration(labelText: 'Amount'),
             keyboardType: TextInputType.number,
-            // onChanged: (value) {
-            //   amountInput = value;
-            // },
+            onSubmitted: (_) => SubmitData,
             controller: amountController,
           ),
           FlatButton(
             child: Text('Add Transaction'),
             textColor: Colors.purple,
-            onPressed: () {
-              addTx(titleController.text, double.parse(amountController.text));
-            },
+            onPressed: SubmitData,
           ),
         ],
       ),
