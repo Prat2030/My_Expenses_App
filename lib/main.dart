@@ -77,6 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // ),
   ];
 
+  // List<Transaction> get _recentTransactions {
+  //   return _userTransactions.where()
+  // }
+
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
       title: txTitle,
