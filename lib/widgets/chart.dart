@@ -48,7 +48,7 @@ class Chart extends StatelessWidget {
       };
       // Here DateFormat is provided with the intl package where E is the day of the week.
       // 0 --> Monday, 1 --> Tuesday, 2 --> Wednesday, 3 --> Thursday and similarly rest all.
-    });
+    }).reversed.toList();
   }
 
   double get totalSpending {
