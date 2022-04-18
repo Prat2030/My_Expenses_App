@@ -15,17 +15,20 @@ class NewTransaction extends StatefulWidget {
 class _NewTransactionState extends State<NewTransaction> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-  late DateTime _selectedDate;
+  DateTime? _selectedDate; // ? means value can be null
 
   void _SubmitData() {
+    if (_amountController.text.isEmpty) {
+      return;
+    }
     final EnteredTitle = _titleController.text;
     final EnteredAmount = double.parse(_amountController.text);
 
-    if (EnteredTitle.isEmpty || EnteredAmount <= 0) {
+    if (EnteredTitle.isEmpty || EnteredAmount <= 0 || _selectedDate == null) {
       return;
     }
 
-    widget.addTx(EnteredTitle, EnteredAmount);
+    widget.addTx(EnteredTitle, EnteredAmount, _selectedDate);
 
     Navigator.of(context).pop();
   }
@@ -75,7 +78,9 @@ class _NewTransactionState extends State<NewTransaction> {
                 Expanded(
                   child: Text(_selectedDate == null
                       ? 'No Date Chosen!'
-                      : 'Picked Date : ${DateFormat.yMd().format(_selectedDate)}'),
+                      : 'Picked Date : ${DateFormat.yMd().format(_selectedDate!)}'),
+                  // If we know that the passed object will not be null at any point
+                  // we can add '!' at the end that ensures value will not be null.
                 ),
                 FlatButton(
                   textColor: Theme.of(context).primaryColor,
