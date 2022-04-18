@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, non_constant_identifier_names, avoid_unnecessary_containers, unused_import, unused_element, unnecessary_new, use_key_in_widget_constructors
 
+import './widgets/chart.dart';
 import 'package:flutter/material.dart';
 import './widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
@@ -77,9 +78,15 @@ class _MyHomePageState extends State<MyHomePage> {
     // ),
   ];
 
-  // List<Transaction> get _recentTransactions {
-  //   return _userTransactions.where()
-  // }
+  // List is a child class of Iterable, and some list methods return Iterable instead of List
+  // Link: https://stackoverflow.com/questions/52345694/dart-iterablee-vs-liste-always-use-iterable
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(
+        Duration(days: 7),
+      ));
+    }).toList();
+  }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -124,14 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Theme.of(context).primaryColor,
-                child: Text('CHART!'),
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_userTransactions),
           ],
         ),
