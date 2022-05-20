@@ -52,9 +52,13 @@ class _NewTransactionState extends State<NewTransaction> {
   // NewTransaction(void Function(String txTitle, double txAmount) addNewTransaction);
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return SingleChildScrollView(
         child: Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.only(
+          top: 10,
+          left: 10,
+          right: 10,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
