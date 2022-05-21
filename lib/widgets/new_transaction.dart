@@ -1,5 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors, non_constant_identifier_names, prefer_const_constructors, unnecessary_null_comparison
 
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -86,14 +89,22 @@ class _NewTransactionState extends State<NewTransaction> {
                   // If we know that the passed object will not be null at any point
                   // we can add '!' at the end that ensures value will not be null.
                 ),
-                FlatButton(
-                  textColor: Theme.of(context).primaryColor,
-                  child: Text(
-                    'Choose Date',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  onPressed: _presentDatePicker,
-                ),
+                Platform.isIOS
+                    ? CupertinoButton(
+                        child: Text(
+                          'Choose Date',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: _presentDatePicker,
+                      )
+                    : FlatButton(
+                        textColor: Theme.of(context).primaryColor,
+                        child: Text(
+                          'Choose Date',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: _presentDatePicker,
+                      ),
               ],
             ),
           ),
