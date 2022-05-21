@@ -159,24 +159,26 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ) as PreferredSizeWidget;
-    final pageBody = SingleChildScrollView(
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-              height: (mediaquery.size.height -
-                      appBar.preferredSize.height -
-                      mediaquery.padding.top) *
-                  0.25,
-              child: Chart(_recentTransactions, _deleteTransaction)),
-          Container(
-              height: (mediaquery.size.height -
-                      appBar.preferredSize.height -
-                      mediaquery.padding.top) *
-                  0.75,
-              child: TransactionList(_userTransactions, _deleteTransaction)),
-        ],
+    final pageBody = SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+                height: (mediaquery.size.height -
+                        appBar.preferredSize.height -
+                        mediaquery.padding.top) *
+                    0.25,
+                child: Chart(_recentTransactions, _deleteTransaction)),
+            Container(
+                height: (mediaquery.size.height -
+                        appBar.preferredSize.height -
+                        mediaquery.padding.top) *
+                    0.75,
+                child: TransactionList(_userTransactions, _deleteTransaction)),
+          ],
+        ),
       ),
     );
     return Platform.isIOS
